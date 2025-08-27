@@ -15,7 +15,7 @@ const geistMono = Geist_Mono({
 export const metadata: Metadata = {
   title: "Landing | Hola mundo",
   description: "Landing de ejemplo con Next.js y Tailwind",
-  metadataBase: new URL("https://example.com"),
+  metadataBase: new URL("https://germanenguix.com"),
   openGraph: {
     title: "Landing | Hola mundo",
     description: "Landing de ejemplo con Next.js y Tailwind",
