@@ -16,8 +16,10 @@ export default function Home() {
               <a href="#sobre-mi" className="hover:text-neutral-900">Sobre mí</a>
             </nav>
             <div className="hidden sm:block">
-              <Button variant="secondary" className="h-8 px-3 text-xs">Contactar</Button>
-            </div>
+              <a href="#contacto">
+                <Button variant="secondary" className="h-8 px-3 text-xs">Contactar</Button>
+          </a>
+        </div>
           </div>
         </Container>
       </header>
