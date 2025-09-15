@@ -1,8 +1,15 @@
+'use client';
+
+import { useState } from "react";
 import { Container } from "@/components/layout/container";
 import { Button } from "@/components/ui/button";
 import { SectionHeading } from "@/components/section-heading";
+import { ContactFormStatic } from "@/components/contact-form-static";
+
+type UserType = 'centro' | 'uni';
 
 export default function Home() {
+  const [selectedUserType, setSelectedUserType] = useState<UserType>('centro');
   return (
     <main className="flex flex-col">
       {/* Header */}
@@ -45,14 +52,28 @@ export default function Home() {
           <div className="py-12 sm:py-16 space-y-8">
             <SectionHeading title="Elige quién eres" />
             <div className="grid gap-6 sm:grid-cols-2 max-w-xl">
-              <div className="rounded-md border border-neutral-200 p-4">
+              <button 
+                onClick={() => setSelectedUserType('centro')}
+                className={`rounded-md border p-4 text-left transition-all ${
+                  selectedUserType === 'centro' 
+                    ? 'border-neutral-800 bg-neutral-50' 
+                    : 'border-neutral-200 hover:border-neutral-300'
+                }`}
+              >
                 <div className="text-sm font-medium text-neutral-900">Soy un centro</div>
                 <div className="text-sm text-neutral-600">Partner body</div>
-              </div>
-              <div className="rounded-md border border-neutral-200 p-4">
+              </button>
+              <button 
+                onClick={() => setSelectedUserType('uni')}
+                className={`rounded-md border p-4 text-left transition-all ${
+                  selectedUserType === 'uni' 
+                    ? 'border-neutral-800 bg-neutral-50' 
+                    : 'border-neutral-200 hover:border-neutral-300'
+                }`}
+              >
                 <div className="text-sm font-medium text-neutral-900">Soy una uni</div>
                 <div className="text-sm text-neutral-600">Partner body</div>
-              </div>
+              </button>
             </div>
           </div>
         </Container>
@@ -64,21 +85,43 @@ export default function Home() {
           <div className="py-12 sm:py-16 space-y-8">
             <SectionHeading title="Productos" subtitle="Subheading" />
             <div className="grid gap-6 sm:grid-cols-3">
-              <article className="rounded-lg border border-neutral-200 p-6 space-y-3">
-                <div className="text-neutral-600 text-sm">🎤 Charla</div>
-                <h3 className="text-xl font-semibold tracking-tight text-neutral-900">Los trabajos del futuro que ya existen</h3>
-                <p className="text-neutral-900 text-base">Descubre roles en tecnología que aún no están en el imaginario de los estudiantes</p>
-              </article>
-              <article className="rounded-lg border border-neutral-800 bg-neutral-800 p-6 space-y-3 text-white">
-                <div className="text-neutral-300 text-sm">⚡ Taller</div>
-                <h3 className="text-xl font-semibold tracking-tight">Tu primer proyecto con IA</h3>
-                <p className="text-base">Desde crear un logo hasta prototipar un producto sencillo</p>
-              </article>
-              <article className="rounded-lg border border-neutral-200 p-6 space-y-3">
-                <div className="text-neutral-600 text-sm">🎲 Reto en equipo</div>
-                <h3 className="text-xl font-semibold tracking-tight text-neutral-900">Imagina un producto con IA para tu centro</h3>
-                <p className="text-neutral-900 text-base">Dinámica gamificada para trabajar en equipo y aplicar lo aprendido</p>
-              </article>
+              {selectedUserType === 'centro' ? (
+                <>
+                  <article className="rounded-lg border border-neutral-200 p-6 space-y-3">
+                    <div className="text-neutral-600 text-sm">🎤 Charla</div>
+                    <h3 className="text-xl font-semibold tracking-tight text-neutral-900">Los trabajos del futuro que ya existen</h3>
+                    <p className="text-neutral-900 text-base">Descubre roles en tecnología que aún no están en el imaginario de los estudiantes</p>
+                  </article>
+                  <article className="rounded-lg border border-neutral-800 bg-neutral-800 p-6 space-y-3 text-white">
+                    <div className="text-neutral-300 text-sm">⚡ Taller</div>
+                    <h3 className="text-xl font-semibold tracking-tight">Tu primer proyecto con IA</h3>
+                    <p className="text-base">Desde crear un logo hasta prototipar un producto sencillo</p>
+                  </article>
+                  <article className="rounded-lg border border-neutral-200 p-6 space-y-3">
+                    <div className="text-neutral-600 text-sm">🎲 Reto en equipo</div>
+                    <h3 className="text-xl font-semibold tracking-tight text-neutral-900">Imagina un producto con IA para tu centro</h3>
+                    <p className="text-neutral-900 text-base">Dinámica gamificada para trabajar en equipo y aplicar lo aprendido</p>
+                  </article>
+                </>
+              ) : (
+                <>
+                  <article className="rounded-lg border border-neutral-200 p-6 space-y-3">
+                    <div className="text-neutral-600 text-sm">🎤 Talk</div>
+                    <h3 className="text-xl font-semibold tracking-tight text-neutral-900">Cómo usamos la IA en una startup real</h3>
+                    <p className="text-neutral-900 text-base">Lorem Ipsum</p>
+                  </article>
+                  <article className="rounded-lg border border-neutral-800 bg-neutral-800 p-6 space-y-3 text-white">
+                    <div className="text-neutral-300 text-sm">⚡ Workshop</div>
+                    <h3 className="text-xl font-semibold tracking-tight">Construye un MVP con IA desde 0</h3>
+                    <p className="text-base">Lorem ipsum</p>
+                  </article>
+                  <article className="rounded-lg border border-neutral-200 p-6 space-y-3">
+                    <div className="text-neutral-600 text-sm">🎲 Mentoría</div>
+                    <h3 className="text-xl font-semibold tracking-tight text-neutral-900">Feedback para los proyectos de alumnos</h3>
+                    <p className="text-neutral-900 text-base">Lorem Ipsum</p>
+                  </article>
+                </>
+              )}
             </div>
           </div>
         </Container>
@@ -90,18 +133,46 @@ export default function Home() {
           <div className="py-12 sm:py-16 space-y-8">
             <SectionHeading title="Beneficios" subtitle="Subheading" />
             <div className="grid gap-6 sm:grid-cols-3">
-              <div className="rounded-lg border border-neutral-200 p-6 space-y-2">
-                <h3 className="text-base font-semibold tracking-tight text-neutral-900">Descubren salidas profesionales que no conocían</h3>
-                <p className="text-neutral-600 text-sm">Descubren salidas profesionales que no conocían.</p>
-              </div>
-              <div className="rounded-lg border border-neutral-200 p-6 space-y-2">
-                <h3 className="text-base font-semibold tracking-tight text-neutral-900">Pierden el miedo a la tecnología con un enfoque lúdico</h3>
-                <p className="text-neutral-600 text-sm">Body text for whatever you’d like to say. Add main takeaway points, quotes, anecdotes, or even a very very short story. </p>
-              </div>
-              <div className="rounded-lg border border-neutral-200 p-6 space-y-2">
-                <h3 className="text-base font-semibold tracking-tight text-neutral-900">Se motivan al ver cómo pueden crear con IA sin necesidad de experiencia previa</h3>
-                <p className="text-neutral-600 text-sm">Body text for whatever you’d like to say. Add main takeaway points, quotes, anecdotes, or even a very very short story. </p>
-              </div>
+              {selectedUserType === 'centro' ? (
+                <>
+                  <div className="rounded-lg border border-neutral-200 p-6 space-y-2">
+                    <h3 className="text-base font-semibold tracking-tight text-neutral-900">Descubren salidas profesionales que no conocían</h3>
+                    <p className="text-neutral-600 text-sm">Descubren salidas profesionales que no conocían.</p>
+                  </div>
+                  <div className="rounded-lg border border-neutral-200 p-6 space-y-2">
+                    <h3 className="text-base font-semibold tracking-tight text-neutral-900">Pierden el miedo a la tecnología con un enfoque lúdico</h3>
+                    <p className="text-neutral-600 text-sm">Body text for whatever you'd like to say. Add main takeaway points, quotes, anecdotes, or even a very very short story. </p>
+                  </div>
+                  <div className="rounded-lg border border-neutral-200 p-6 space-y-2">
+                    <h3 className="text-base font-semibold tracking-tight text-neutral-900">Se motivan al ver cómo pueden crear con IA sin necesidad de experiencia previa</h3>
+                    <p className="text-neutral-600 text-sm">Body text for whatever you'd like to say. Add main takeaway points, quotes, anecdotes, or even a very very short story. </p>
+                  </div>
+                </>
+              ) : (
+                <>
+                  <div className="rounded-lg border border-neutral-200 p-6 space-y-2">
+                    <div className="w-8 h-8 rounded-full bg-neutral-100 flex items-center justify-center mb-4">
+                      <span className="text-neutral-600">ℹ</span>
+                    </div>
+                    <h3 className="text-base font-semibold tracking-tight text-neutral-900">Ven casos de aplicación real en una startup digital</h3>
+                    <p className="text-neutral-600 text-sm">Descubren salidas profesionales que no conocían.</p>
+                  </div>
+                  <div className="rounded-lg border border-neutral-200 p-6 space-y-2">
+                    <div className="w-8 h-8 rounded-full bg-neutral-100 flex items-center justify-center mb-4">
+                      <span className="text-neutral-600">ℹ</span>
+                    </div>
+                    <h3 className="text-base font-semibold tracking-tight text-neutral-900">Aprenden herramientas que mejoran su empleabilidad inmediata</h3>
+                    <p className="text-neutral-600 text-sm">Body text for whatever you'd like to say. Add main takeaway points, quotes, anecdotes, or even a very very short story. </p>
+                  </div>
+                  <div className="rounded-lg border border-neutral-200 p-6 space-y-2">
+                    <div className="w-8 h-8 rounded-full bg-neutral-100 flex items-center justify-center mb-4">
+                      <span className="text-neutral-600">ℹ</span>
+                    </div>
+                    <h3 className="text-base font-semibold tracking-tight text-neutral-900">Trabajan con dinámicas de equipo similares a las del mundo laboral</h3>
+                    <p className="text-neutral-600 text-sm">Body text for whatever you'd like to say. Add main takeaway points, quotes, anecdotes, or even a very very short story. </p>
+                  </div>
+                </>
+              )}
             </div>
           </div>
         </Container>
@@ -130,34 +201,7 @@ export default function Home() {
               <h2 className="text-2xl sm:text-3xl font-bold tracking-tight text-neutral-900">Invitame a tu centro</h2>
               <p className="text-neutral-600">Rellena el formulario y pronto me pondré en contacto</p>
             </div>
-            <form className="w-full max-w-sm bg-white p-6 rounded-lg border border-neutral-200 space-y-3">
-              <div>
-                <label className="block text-sm text-neutral-600 mb-1">Nombre del centro</label>
-                <input className="w-full rounded-md border border-neutral-300 px-3 py-2 text-sm outline-none focus:ring-2 focus:ring-neutral-300" placeholder="Value" />
-              </div>
-              <div>
-                <label className="block text-sm text-neutral-600 mb-1">Nombre de contacto</label>
-                <input className="w-full rounded-md border border-neutral-300 px-3 py-2 text-sm outline-none focus:ring-2 focus:ring-neutral-300" placeholder="Value" />
-              </div>
-              <div>
-                <label className="block text-sm text-neutral-600 mb-1">Email</label>
-                <input type="email" className="w-full rounded-md border border-neutral-300 px-3 py-2 text-sm outline-none focus:ring-2 focus:ring-neutral-300" placeholder="Value" />
-              </div>
-              <div>
-                <label className="block text-sm text-neutral-600 mb-1">Mensaje</label>
-                <textarea className="w-full rounded-md border border-neutral-300 px-3 py-2 text-sm outline-none focus:ring-2 focus:ring-neutral-300" placeholder="Value" rows={3} />
-              </div>
-              <div className="space-y-2">
-                <p className="text-sm text-neutral-900">Como prefieres mi asistencia</p>
-                <label className="flex items-center gap-2 text-sm text-neutral-900">
-                  <input type="checkbox" defaultChecked className="size-4" /> Presencial
-                </label>
-                <label className="flex items-center gap-2 text-sm text-neutral-900">
-                  <input type="checkbox" defaultChecked className="size-4" /> Online
-                </label>
-              </div>
-              <Button type="submit" className="w-full">Enviar</Button>
-            </form>
+            <ContactFormStatic />
           </div>
         </Container>
       </section>
